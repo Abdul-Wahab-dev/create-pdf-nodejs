@@ -2,8 +2,8 @@ const ejs = require("ejs");
 const pdf = require("html-pdf");
 const options = {
   format: "Letter",
-  height: "3508px",
-  width: "2480px",
+  height: "3008px",
+  width: "2080px",
   orientation: "portrait",
 };
 const Report = require("../models/ReportModel");
