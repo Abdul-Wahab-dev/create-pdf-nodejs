@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Report</title>
+    <!-- <link rel="stylesheet" href="style.css" media="all" /> -->
+    <style>
+        
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+body {
+  position: relative;
+  width: 21cm;  
+  height: 29.7cm; 
+  margin: 0 auto; 
+  color: #555555;
+  background: #FFFFFF; 
+  font-family: Arial, sans-serif; 
+  font-size: 14px; 
+  font-family: SourceSansPro;
+}
+
+header {
+  padding: 20px 0;
+  margin-bottom: 20px;
+  border-bottom: 4px solid #00875a;
+}
+
+#logo {
+  float: left;
+  margin-top: 8px;
+}
+
+/* #logo img {
+  height: 70px;
+} */
+
+#company {
+  float: right;
+  text-align: right;
+}
+
+
+#details {
+  margin-bottom: 20px;
+}
+
+
+#client .to {
+  color: #777777;
+}
+
+h2.name {
+  font-size: 1.4em;
+  font-weight: normal;
+  margin: 0;
+}
+
+#invoice {
+  float: right;
+  text-align: right;
+}
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 20px;
+  table-layout: auto;
+}
+
+table th{
+    background-color: #00875a !important;
+    color: #fff;
+}
+
+table th,
+table td {
+  padding: 10px;
+  text-align: center;
+  /* border-bottom: 1px solid #FFFFFF; */
+  border: 1px solid #cccccc;
+  font-size: 11px;
+}
+
+table th {
+  /* white-space: nowrap;         */
+  font-weight: normal;
+}
+
+table td {
+  text-align: left;
+}
+tbody tr:nth-child(even) {
+        background: #EEEEEE;
+      }
+
+      tbody tr:nth-child(odd) {
+        background: #fff;
+      }
+
+.totla-due{
+    padding: 20px 20px 20px 20px !important;
+    background-color: #00875a !important;
+    margin-bottom: 0px; 
+}
+.totla-due p{
+    margin: -10px !important;
+    /* padding-bottom: 20px; */
+}
+    </style>
+  </head>
+  <body>
+    <header class="clearfix">
+      <div id="logo">
+        <img src="/public/logo.png"  width="100"/>
+      </div>
+      <div id="company">
+        <h3 class="name"><%= contact %></h3>
+      
+      </div>
+      </div>
+    </header>
+    <main>
+      <div id="details" class="clearfix">
+        <div id="client">
+          <h3 class="name">Bill TO:</h3>
+          <h4 class="to"><%= bill_to %></h4>
+        </div>
+    </div>
+    <div>
+        <h3 style="font-weight: 100; text-align: center;">Ledger Details</h3>
+    </div>
+    <div style="background-color: #00875a;" class="totla-due">
+        <p style="float: left; color: #fff;">Total Due</p><p style="float: right;color: #fff;"><%= report.length %> Trips | <%= totalDues %></p>
+    </div>
+    <div>
+        <p style="float: right; font-size: 20px;font-weight: 100;">Amount in words: <strong><%= total_in_words %></strong></p>
+    </div>
+      <table  cellspacing="0" cellpadding="0">
+        <thead>
+          <tr>
+            <th>S.No.</th>
+            <th>LR Number</th>
+            <th>Date</th>
+            <th>Truck No.</th>
+            <th>Route</th>
+            <th>Status</th>
+            <th>Rate</th>
+            <th>Freight</th>
+            <th>Advance</th>
+            <th>Changes</th>
+            <th>Deduction</th>
+            <th>Payment</th>
+            <th>Total Due</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% if(report.length >0 ) { %>
+                <% report.forEach((el,i) => { %>
+                    <tr>
+                        <td> <%=  i+1 %> </td>
+                        <td><%= el.lr_num %></td>
+                        <td><%= el.createdAt %></td>
+                        <td><%= el.truck_no %></td>
+                        <td><%= el.route %></td>
+                        <td><%= el.status %></td>
+                        <td><%= el.rate %></td>
+                        <td><%= el.freight %></td>
+                        <td><%= el.advance %></td>
+                        <td><%= el.charges %></td>
+                        <td><%= el.deduction %></td>
+                        <td><%= el.payment %></td>
+                        <td><%= el.totalDue %></td>
+                        <!-- <td>50000</td> -->
+                      </tr>
+                <% }) %>
+                <% }%>
+           
+              <tr style="background-color: #EEEEEE;">
+                <td colspan="7"><p style="font-size: 18px;">Total</p></td>
+                <td><%= freight %></td>
+                <td><%= advance %></td>
+                <td><%= charges %></td>
+                <td><%= deduction %></td>
+                <td><%= payment %></td>
+                <td><%= totalDues %></td>
+                <!-- <td><%= freight %></td> -->
+                
+              </tr>
+          
+        </tbody>
+      </table>
+    
+    </main>
+    <footer style="position: fixed; width: 100%; bottom: 100px; text-align: center;">
+        <p>Footer</p>
+    </footer>
+
+  </body>
+</html>
