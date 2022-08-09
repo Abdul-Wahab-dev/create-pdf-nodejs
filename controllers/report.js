@@ -1,6 +1,11 @@
 const ejs = require("ejs");
 const pdf = require("html-pdf");
-const options = { format: "Letter" };
+const options = {
+  format: "Letter",
+  height: "10.5in",
+  width: "8in",
+  orientation: "portrait",
+};
 const Report = require("../models/ReportModel");
 const converter = require("number-to-words");
 // @route                       POST /api/v1/report
