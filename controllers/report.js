@@ -61,7 +61,7 @@ exports.createReport = async (req, res, next) => {
       "Content-Type": "application/pdf",
       "Content-Disposition": `attachment;filename=invoice.pdf`,
     });
-    console.log("HIHIOHIHIHIOIOH");
+    // console.log("HIHIOHIHIHIOIOH");
     ejs
       .renderFile(require.resolve("./table.ejs"), {
         report: data,
